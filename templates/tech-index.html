@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+        <section class="section first-section">
+            <div class="container-fluid">
+                <div class="masonry-blog clearfix">
+                    {% for post in posts %}
+                    <div class="first-slot">
+                        <div class="masonry-box post-media">
+                             <img src="{{ post.image.url }}" alt="" class="img-fluid-post">
+                             <div class="shadoweffect">
+                                <div class="shadow-desc">
+                                    <div class="blog-meta">
+                                        <span class="bg-orange"><a href="" title="">{{post.category}}</a></span>
+                                        <h4><a href="{{post.get_absolute_url}}" title="">{{post.title}}</a></h4>
+                                        <small><a href="" title="">{{post.publish}}</a></small>
+                                        <small><a href="" title="">by {{post.author|capfirst }}</a></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end shadow-desc -->
+                            </div><!-- end shadow -->
+                        </div><!-- end post-media -->
+                    </div><!-- end first-side -->
+                    {% endfor %}
+                </div><!-- end masonry -->
+            </div>
+        </section>
+
+        {% include 'blog/posts.html' with page=all_posts %}
+
+{% endblock %}

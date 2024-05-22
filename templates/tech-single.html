@@ -1,0 +1,114 @@
+{% extends 'base.html' %}
+{% block content %}
+        <section class="section single-wrapper">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-title-area text-center">
+
+                                <span class="color-orange"><a href="tech-category-01.html" title="">{{post.category}}</a></span>
+
+                                <h3>{{post.title}}</h3>
+
+                                <div class="blog-meta big-meta">
+                                    <small><a href="tech-single.html" title="">{{post.publish}}</a></small>
+                                    <small><a href="tech-author.html" title="">by {{post.author|capfirst}}</a></small>
+                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+                                </div><!-- end meta -->
+
+                            </div><!-- end title -->
+
+                            <div class="single-post-media">
+                                <img src="{{post.image.url}}" alt="" class="img-fluid">
+                            </div><!-- end media -->
+
+                            <div class="blog-content">  
+                                <div class="pp">
+                                    <p>{{post.body}}</p>
+                                </div><!-- end pp -->
+
+                            </div><!-- end content -->
+
+                            <hr class="invis1">
+
+                            <div class="custombox clearfix">
+                                <h4 class="small-title">You may also like</h4>
+                                <div class="row">
+                                    {% for post in similar_posts %}
+                                    <div class="col-lg-6">
+                                        <div class="blog-box">
+                                            <div class="post-media">
+                                                <a href="{{post.get_absolute_url}}" title="">
+                                                    <img src="{{post.image.url}}" alt="" class="img-fluid">
+                                                    <div class="hovereffect">
+                                                        <span class=""></span>
+                                                    </div><!-- end hover -->
+                                                </a>
+                                            </div><!-- end media -->
+                                            <div class="blog-meta">
+                                                <h4><a href="{{post.get_absolute_url}}" title="">{{post.title|truncatewords:8}}</a></h4>
+                                                <small><a href="" title="">{{post.category}}</a></small>
+                                                <small><a href="" title="">{{post.publish}}</a></small>
+                                            </div><!-- end meta -->
+                                        </div><!-- end blog-box -->
+                                    </div><!-- end col -->
+                                    {% endfor %}
+                                </div><!-- end row -->
+                            </div><!-- end custom-box -->
+                            <h2>Tags:
+                                {% for tag in post.tags.all %}
+                                <a href="{% url 'post_list_by_category' tag.slug %}">{{tag.name}}</a>
+                                {% if not forloop.last%},{% endif %}
+                                {% endfor %}
+                            </h2>
+
+                            <hr class="invis1">
+
+                            <div class="custombox clearfix">
+                                <h4 class="small-title">{{comments.count}} Comments</h4>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <div class="comments-list">
+                                            {% if comments %}
+                                            {% for comment in comments %}
+                                            
+                                            <div class="media">
+                                                <a class="media-left" href="#">
+                                                    <img  alt="" class="rounded-circle">
+                                                </a>
+                                                <div class="media-body">
+                                                    <h4 class="media-heading user_name">{{comment.name}}<small>{{comment.publish}}</small></h4>
+                                                    <p>{{comment.body}}</p>
+                                                </div>
+                                            </div>
+                                            {% endfor %}
+                                            {% else %}
+                                            <h2>No comments</h2>
+                                            {% endif %}
+                                        </div>
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div><!-- end custom-box -->
+
+                            <hr class="invis1">
+
+                            <div class="custombox clearfix">
+                                <h4 class="small-title">Leave a Reply</h4>
+                                <div class="row">
+                                    <div class="col-lg-12">
+                                        <form class="form-wrapper" method="post" action="{% url 'comment' post.slug %}" >
+                                            {{form.as_p}}
+                                            {% csrf_token %}
+                                            <button type="submit" class="btn btn-primary">Submit Comment</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+{% endblock %}
+        

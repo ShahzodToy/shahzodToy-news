@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-9 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-list clearfix">
+                                {% for comment in comments %}
+                                <div class="blog-box row">
+                                    <div class="col-md-4">
+                                        <div class="post-media">
+                                            <a href="{{ commment.cat_post.get.abosulte_url }}" title="">
+                                                <img src="{{comment.post.image.url}}" alt="" class="img-fluid">
+                                                <div class="hovereffect"></div>
+                                            </a>
+                                        </div><!-- end media -->
+                                    </div><!-- end col -->
+
+                                    <div class="blog-meta big-meta col-md-8">
+                                        <h4><a href="{{ commment.get_absolute_url }}" title="">{{comment.post.title}}</a></h4>
+                                        <p>{{comment.body}}</p>
+                                        <small class="firstsmall"><a class="bg-orange" href="#" title="">Reviews</a></small>
+                                        <small><a href="tech-single.html" title="">{{comment.publish}}</a></small>
+                                        <small><a href="tech-author.html" title="">by {{comment.name}}</a></small>
+                                        <small><a href="tech-single.html" title=""><i class="fa fa-eye"></i> 1114</a></small>
+                                    </div><!-- end meta -->
+                                </div><!-- end blog-box -->
+                                <hr class="invis">
+                                {% endfor %}
+
+                                
+
+                            </div><!-- end blog-list -->
+                        </div><!-- end page-wrapper -->
+
+                    
+
+                        
+                    </div><!-- end col -->
+
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+
+{% endblock %}
